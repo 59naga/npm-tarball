@@ -8,9 +8,6 @@
   <a href="https://travis-ci.org/59naga/npm-tarball">
     <img src="http://img.shields.io/travis/59naga/npm-tarball.svg?style=flat-square">
   </a>
-  <a href="https://ci.appveyor.com/project/59naga/npm-tarball">
-    <img src="https://img.shields.io/appveyor/ci/59naga/npm-tarball.svg?style=flat-square">
-  </a>
   <a href="https://codeclimate.com/github/59naga/npm-tarball/coverage">
     <img src="https://img.shields.io/codeclimate/github/59naga/npm-tarball.svg?style=flat-square">
   </a>
