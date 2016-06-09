@@ -13,6 +13,10 @@ export function resolveUri (name, range) {
         reject(error)
         return
       }
+      if (data.versions === undefined) {
+        reject(new Error(`non-existent package "${name}"`))
+        return
+      }
 
       const versions = Object.keys(data.versions)
       const version = maxSatisfyingVersion(versions, String(range)) || data['dist-tags'].latest

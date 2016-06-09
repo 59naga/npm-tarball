@@ -4,6 +4,7 @@ import {createGunzip} from 'zlib'
 import {Parse as tarParse} from 'tar'
 import streamToPromise from 'stream-to-promise'
 import {createReadStream as streamify} from 'streamifier'
+import {rejects} from 'assert-exception'
 
 // target
 import {resolveUri, fetch, NpmTarball} from '../src'
@@ -44,6 +45,9 @@ parallel('.resolveUri', () => {
     assert((await resolveUri(fixture, '0.1.x')) === `${expectedPrefix}0.1.4.tgz`)
     assert((await resolveUri(fixture, '^0.1.0')) === `${expectedPrefix}0.1.4.tgz`)
     assert((await resolveUri(fixture, '~0.0')) === `${expectedPrefix}0.0.4.tgz`)
+  })
+  it('if non-existent package, should throw error', async () => {
+    assert((await rejects(resolveUri('invalid!package'))).message === 'non-existent package "invalid!package"')
   })
 })
 

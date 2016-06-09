@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "abigail": "^1.7.1",
+    "assert-exception": "^1.1.0",
     "babel-cli": "^6.9.0",
     "babel-eslint": "^6.0.4",
     "babel-plugin-transform-bluebird": "^0.1.1",
