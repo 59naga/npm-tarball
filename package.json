@@ -17,6 +17,7 @@
     "cover": "abby cover:*",
     "cover:test": "nyc --reporter=lcov --reporter=text npm test",
     "cover:report": "npm-if TRAVIS \"codeclimate-test-reporter < coverage/lcov.info\"",
+    "lint": "eslint src test",
     "build": "abby \"babel src --out-dir lib --source-maps\" --env",
     "postversion": "git push --follow-tags && conventional-github-releaser -p atom -r 0"
   },
