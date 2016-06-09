@@ -7,7 +7,7 @@ import {createReadStream as streamify} from 'streamifier'
 import {rejects} from 'assert-exception'
 
 // target
-import {resolveUri, fetch, NpmTarball} from '../src'
+import {resolveUri, fetch, createReadStream} from '../src'
 
 // helper
 const fixture = 'babel-plugin-add-module-exports'
@@ -27,7 +27,7 @@ const extractPackageJson = (tarballStream, callback) => {
   })
 }
 const extractPackageJsonViaNpmRegistory = (...args) => {
-  return extractPackageJson(new NpmTarball(...args))
+  return extractPackageJson(createReadStream(...args))
 }
 
 // specs
@@ -59,8 +59,8 @@ parallel('.fetch', () => {
   })
 })
 
-parallel('.NpmTarball', () => {
-  it('should return ReadableStream using `.NpmTarball`', async () => {
+parallel('.createReadStream(.NpmTarball)', () => {
+  it('should return ReadableStream using `.createReadStream`', async () => {
     const info = await extractPackageJsonViaNpmRegistory(fixture)
     assert(info.version === '0.2.1')
   })

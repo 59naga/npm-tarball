@@ -48,3 +48,7 @@ export class NpmTarball extends PassThrough {
     .then(uri => request(uri).pipe(this))
   }
 }
+
+export function createReadStream (...args) {
+  return new NpmTarball(...args)
+}

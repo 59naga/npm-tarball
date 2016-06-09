@@ -56,15 +56,16 @@ API
   fetch('jquery', '~2.1').then(buffer => writeFileSync('jquery-v2.1.tgz', buffer))
   ```
 
-  * `class NpmTarball(packageName, semver)` -> `tarballReadableStream`
+  * `new NpmTarball(packageName, semver)` -> `tarballReadableStream`
+  * `createReadStream(packageName, semver)` -> `tarballReadableStream`
 
   ```js
-  import {NpmTarball} from 'npm-tarball'
+  import {createReadStream} from 'npm-tarball'
   import {createWriteStream} from 'fs'
 
-  new NpmTarball('jquery').pipe(createWriteStream('jquery-latest.tgz'))
-  new NpmTarball('jquery', 1).pipe(createWriteStream('jquery-v1.tgz'))
-  new NpmTarball('jquery', '~2.1').pipe(createWriteStream('jquery-v2.1.tgz'))
+  createReadStream('jquery').pipe(createWriteStream('jquery-latest.tgz'))
+  createReadStream('jquery', 1).pipe(createWriteStream('jquery-v1.tgz'))
+  createReadStream('jquery', '~2.1').pipe(createWriteStream('jquery-v2.1.tgz'))
   ```
 
 Development
