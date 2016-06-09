@@ -37,6 +37,7 @@ parallel('.resolveUri', () => {
   })
   it('should interpret the range of semver', async () => {
     assert((await resolveUri(fixture, '4')) === `${expectedPrefix}0.2.1.tgz`)
+    assert((await resolveUri(fixture, 2)) === `${expectedPrefix}0.2.1.tgz`)
     assert((await resolveUri(fixture, '1 || 2 || 3')) === `${expectedPrefix}0.2.1.tgz`)
     assert((await resolveUri(fixture, '0.x')) === `${expectedPrefix}0.2.1.tgz`)
     assert((await resolveUri(fixture, '0.2')) === `${expectedPrefix}0.2.1.tgz`)

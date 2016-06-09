@@ -15,7 +15,7 @@ export function resolveUri (name, range) {
       }
 
       const versions = Object.keys(data.versions)
-      const version = maxSatisfyingVersion(versions, range) || data['dist-tags'].latest
+      const version = maxSatisfyingVersion(versions, String(range)) || data['dist-tags'].latest
 
       resolve(format(api, name, `-/${name}-${version}.tgz`))
     })
