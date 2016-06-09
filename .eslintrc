@@ -1,0 +1,17 @@
+---
+extends:
+  - standard
+  - import
+parser: babel-eslint
+
+env:
+  node: true
+  mocha: true
+
+rules:
+  max-len:
+    - 1
+    - 100
+  complexity:
+    - 1
+    - max: 10
