@@ -1,0 +1,9 @@
+# disable legacy eslint of codeclimate
+engines:
+  eslint:
+    enabled: false
+ratings:
+  paths:
+  - src/**
+  - test/**
+  - "**.js"
