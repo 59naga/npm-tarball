@@ -1,6 +1,6 @@
 import request from 'request'
 import {format} from 'util'
-import {maxSatisfying as maxSatisfyingVersion} from 'semver'
+import {maxSatisfying} from 'semver'
 import {PassThrough} from 'stream'
 
 export function resolveUri (name, range) {
@@ -19,9 +19,21 @@ export function resolveUri (name, range) {
       }
 
       const versions = Object.keys(data.versions)
-      const version = maxSatisfyingVersion(versions, String(range)) || data['dist-tags'].latest
+      if (range == null) {
+        const version = data['dist-tags'].latest
+        const tarballUri = format(api, name, `-/${name}-${version}.tgz`)
+        resolve(tarballUri)
+        return
+      }
 
-      resolve(format(api, name, `-/${name}-${version}.tgz`))
+      const rangeValue = range != null ? String(range) : null
+      const version = maxSatisfying(versions, rangeValue)
+      if (version === null) {
+        reject(new TypeError(`Invalid Version: ${versions.join(', ')}`))
+        return
+      }
+      const tarballUri = format(api, name, `-/${name}-${version}.tgz`)
+      resolve(tarballUri)
     })
   })
 }

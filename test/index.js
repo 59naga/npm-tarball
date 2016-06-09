@@ -37,9 +37,8 @@ parallel('.resolveUri', () => {
     assert((await resolveUri(fixture)) === `${expectedPrefix}0.2.1.tgz`)
   })
   it('should interpret the range of semver', async () => {
-    assert((await resolveUri(fixture, '4')) === `${expectedPrefix}0.2.1.tgz`)
-    assert((await resolveUri(fixture, 2)) === `${expectedPrefix}0.2.1.tgz`)
-    assert((await resolveUri(fixture, '1 || 2 || 3')) === `${expectedPrefix}0.2.1.tgz`)
+    assert((await resolveUri(fixture, 0.2)) === `${expectedPrefix}0.2.1.tgz`)
+    assert((await resolveUri(fixture, '0.1 || 0.2')) === `${expectedPrefix}0.2.1.tgz`)
     assert((await resolveUri(fixture, '0.x')) === `${expectedPrefix}0.2.1.tgz`)
     assert((await resolveUri(fixture, '0.2')) === `${expectedPrefix}0.2.1.tgz`)
     assert((await resolveUri(fixture, '0.1.x')) === `${expectedPrefix}0.1.4.tgz`)
@@ -47,7 +46,13 @@ parallel('.resolveUri', () => {
     assert((await resolveUri(fixture, '~0.0')) === `${expectedPrefix}0.0.4.tgz`)
   })
   it('if non-existent package, should throw error', async () => {
-    assert((await rejects(resolveUri('invalid!package'))).message === 'non-existent package "invalid!package"')
+    const expectedMessage = 'non-existent package "invalid!package"'
+    assert((await rejects(resolveUri('invalid!package'))).message === expectedMessage)
+  })
+  it('if non-existent version, should throw error', async () => {
+    const expectedMessage = /^Invalid Version: 0.0.0, 0.0.1/
+    assert((await rejects(resolveUri(fixture, '1 || 2 || 3'))).message.match(expectedMessage))
+    assert((await rejects(resolveUri(fixture, '4'))).message.match(expectedMessage))
   })
 })
 
