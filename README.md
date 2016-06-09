@@ -68,6 +68,10 @@ API
   createReadStream('jquery', '~2.1').pipe(createWriteStream('jquery-v2.1.tgz'))
   ```
 
+Related project
+---
+* [npm-tarball.antle.red - npm tarball redirect server](https://github.com/beraboume/npm-tarball.antle.red#readme)
+
 Development
 ---
 Requirement global
